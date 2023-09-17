@@ -19,18 +19,18 @@ api = Blueprint('api', __name__)
 
 # Load pytorch model for inference
 model_name = 'model_en.pth'
-model_path = f'./ml/models/{model_name}'
+model_path = f'./ml/{model_name}'
 model = CharacterLevelCNN()
 
 
-if model_name not in os.listdir('./ml/models/'):
+if model_name not in os.listdir('./ml/'):
     print(f'downloading the trained model {model_name}')
     wget.download(
         "https://github.com/ahmedbesbes/character-based-cnn/releases/download/model_en_tp_amazon/model_tp_amazon_1014.pth",
         out=model_path
     )
 else:
-    print('model already saved to api/ml/models')
+    print('model already saved to api/ml/')
 
 if torch.cuda.is_available():
     trained_weights = torch.load(model_path)
